@@ -8,12 +8,12 @@ Raw threat intelligence from APIs is often "locked" in complex, nested JSON arra
 
 | Layer | Service Used | Implementation Details |
 | :--- | :--- | :--- |
-| **Ingestion** | Python (Requests/Boto3) & AWS Lambda | Event-driven extraction from AbuseIPDB API |
-| **Orchestration** | Amazon EventBridge | Scheduled micro-batch triggers (Cron-based) |
-| **Storage** | Amazon S3 | Multi-tier Data Lake (Bronze, Silver, Curated zones) |
-| **Processing** | Amazon Athena | Serverless SQL queries & complex JSON Unnesting |
-| **Cataloging** | AWS Glue Data Catalog | Schema enforcement and metadata management |
-| **Visualization** | Power BI | Interactive SOC dashboards via Simba ODBC bridge |
+| **Ingestion** | Python (Requests/Boto3) & AWS Lambda | Automated extraction from AbuseIPDB API |
+| **Orchestration** | Amazon EventBridge | Scheduled hourly micro-batching |
+| **Storage** | Amazon S3 | Multi-tier storage (Raw Bronze & Analytical Silver) |
+| **Processing** | Amazon Athena | Serverless SQL logic and hierarchical JSON unnesting |
+| **Cataloging** | AWS Glue Data Catalog | Automated metadata management and schema enforcement |
+| **Visualization** | Power BI | Real-time security telemetry dashboarding |
 
 ## 3. Data Engineering & "Dirty Data" Resolution 
 To simulate real-world enterprise data challenges, this pipeline resolves the following engineered anomalies:
