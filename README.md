@@ -1,5 +1,7 @@
 # SENTINEL FLOW: Enterprise Serverless Threat Intelligence 
+
 "An automated pipeline on AWS that resolves the 'Data Silo' challenge by transforming raw security telemetry into actionable risk forensics."
+
 ## 1. The Problem We Solve Data Fragmentation: Raw threat intelligence from APIs is often "locked" in complex, nested JSON arrays that standard BI tools cannot interpret natively.Manual Bottlenecks: Security teams often rely on static blacklists; this project automates the lifecycle of a threat, from API ingestion to a live "Risk Map".
 ## 2. Technology Stack
 
