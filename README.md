@@ -42,7 +42,45 @@ Power BI Dashboard            ← Live threat risk map
 ## Data Engineering Challenges Solved
 
 Real-world threat data is messy. This pipeline resolves four categories of engineered anomalies:
-
+┌─────────────────────────┐
+                       │      AbuseIPDB API      │
+                       └────────────┬────────────┘
+                                    │
+                                    ▼
+       ┌─────────────────────────────────────────────────────────┐
+       │                AWS Lambda (Python/Boto3)                │
+       │          ─── Triggered hourly by EventBridge ───        │
+       └────────────────────────────┬────────────────────────────┘
+                                    │
+                                    ▼
+                       ┌─────────────────────────┐
+                       │     S3 Bronze Layer     │
+                       │     (Raw JSON Data)     │
+                       └────────────┬────────────┘
+                                    │
+                                    ▼
+                       ┌─────────────────────────┐
+                       │  AWS Glue Data Catalog  │
+                       │  (Schema Enforcement)   │
+                       └────────────┬────────────┘
+                                    │
+                                    ▼
+                       ┌─────────────────────────┐
+                       │   Amazon Athena (SQL)   │
+                       │  (Flattening/Cleaning)  │
+                       └────────────┬────────────┘
+                                    │
+                                    ▼
+                       ┌─────────────────────────┐
+                       │     S3 Silver Layer     │
+                       │  (Curated Parquet/Data) │
+                       └────────────┬────────────┘
+                                    │
+                                    ▼
+                       ┌─────────────────────────┐
+                       │    Power BI Dashboard   │
+                       │ (Live Threat Risk Map)  │
+                       └─────────────────────────┘
 | Problem | Solution |
 |---|---|
 | Nested JSON arrays (attack categories) | `CROSS JOIN UNNEST` in Athena SQL |
