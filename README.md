@@ -9,8 +9,6 @@ An automated, fully serverless ETL pipeline on AWS that ingests 100–1,000 thre
 intelligence records per hour from the AbuseIPDB API and transforms them into a
 live, queryable risk map — with zero manual intervention from API call to dashboard refresh.
 
-![Architecture Diagram](docs/architecture.png)
-
 ## The Problem
 
 Raw threat intelligence APIs return deeply nested JSON arrays that standard BI tools
