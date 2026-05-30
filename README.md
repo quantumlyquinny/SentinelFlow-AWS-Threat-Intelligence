@@ -17,45 +17,45 @@ manual updates. This pipeline automates the full threat lifecycle: ingest → cl
 enrich → visualise.
 
 ## Architecture
-                       ┌─────────────────────────┐
-                       │      AbuseIPDB API      │
-                       └────────────┬────────────┘
-                                    │
-                                    ▼
-       ┌─────────────────────────────────────────────────────────┐
-       │                AWS Lambda (Python/Boto3)                │
-       │          ─── Triggered hourly by EventBridge ───        │
-       └────────────────────────────┬────────────────────────────┘
-                                    │
-                                    ▼
-                       ┌─────────────────────────┐
-                       │     S3 Bronze Layer     │
-                       │     (Raw JSON Data)     │
-                       └────────────┬────────────┘
-                                    │
-                                    ▼
-                       ┌─────────────────────────┐
-                       │  AWS Glue Data Catalog  │
-                       │  (Schema Enforcement)   │
-                       └────────────┬────────────┘
-                                    │
-                                    ▼
-                       ┌─────────────────────────┐
-                       │   Amazon Athena (SQL)   │
-                       │  (Flattening/Cleaning)  │
-                       └────────────┬────────────┘
-                                    │
-                                    ▼
-                       ┌─────────────────────────┐
-                       │     S3 Silver Layer     │
-                       │  (Curated Parquet/Data) │
-                       └────────────┬────────────┘
-                                    │
-                                    ▼
-                       ┌─────────────────────────┐
-                       │    Power BI Dashboard   │
-                       │ (Live Threat Risk Map)  │
-                       └─────────────────────────┘
+                                                       ┌─────────────────────────┐
+                                                       │      AbuseIPDB API      │
+                                                       └────────────┬────────────┘
+                                                                    │
+                                                                    ▼
+                                       ┌─────────────────────────────────────────────────────────┐
+                                       │                AWS Lambda (Python/Boto3)                │
+                                       │          ─── Triggered hourly by EventBridge ───        │
+                                       └────────────────────────────┬────────────────────────────┘
+                                                                    │
+                                                                    ▼
+                                                       ┌─────────────────────────┐
+                                                       │     S3 Bronze Layer     │
+                                                       │     (Raw JSON Data)     │
+                                                       └────────────┬────────────┘
+                                                                    │
+                                                                    ▼
+                                                       ┌─────────────────────────┐
+                                                       │  AWS Glue Data Catalog  │
+                                                       │  (Schema Enforcement)   │
+                                                       └────────────┬────────────┘
+                                                                    │
+                                                                    ▼
+                                                       ┌─────────────────────────┐
+                                                       │   Amazon Athena (SQL)   │
+                                                       │  (Flattening/Cleaning)  │
+                                                       └────────────┬────────────┘
+                                                                    │
+                                                                    ▼
+                                                       ┌─────────────────────────┐
+                                                       │     S3 Silver Layer     │
+                                                       │  (Curated Parquet/Data) │
+                                                       └────────────┬────────────┘
+                                                                    │
+                                                                    ▼
+                                                       ┌─────────────────────────┐
+                                                       │    Power BI Dashboard   │
+                                                       │ (Live Threat Risk Map)  │
+                                                       └─────────────────────────┘
 | Problem | Solution |
 |---|---|
 | Nested JSON arrays (attack categories) | `CROSS JOIN UNNEST` in Athena SQL |
